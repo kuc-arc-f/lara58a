@@ -5,13 +5,17 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        タスク一覧
+        <BR />
+        <h1>タスク一覧 </h1>
+        <BR />
     </div>
     <div class="panel-body">
         <table class="table table-striped task-table">
             <thead>
                 <th>タスク名</th>
+                <!--
                 <th>完了</th>
+                -->
                 <th>編集</th>
                 <th>削除</th>
             </thead>
@@ -20,10 +24,7 @@
                 @foreach ($tasks as $task)
                     <tr>
                         <td class="table-text">
-                            {{ link_to_route('tasks.show', $task->name, $task->id) }}
-                        </td>
-                        <td class="table-text">
-                            {{ $task->done ? '完了' : '未' }}
+                            {{ link_to_route('tasks.show', $task->title, $task->id) }}
                         </td>
                         <td class="table-text">
                             {{ link_to_route('tasks.edit', '編集'
@@ -40,11 +41,14 @@
             </tbody>
         </table>
         <br />
-        new:<br />
-        {{ link_to_route('tasks.create', '[ create ]' ) }}
+        <!-- paginater -->
+        {{ $tasks->links() }}
+
+        <br />
+        <hr />
+        {{ link_to_route('tasks.create', 'Create' ,null, ['class' => 'btn btn-primary']) }}
         <br />
         <br />
-        <a href="make/"  class="btn btn-primary ">詳細はこちら </a>
     </div>
 </div>
 
