@@ -5,9 +5,10 @@
 <br />
 <div class="row">
     <div class="col-sm-6">
-        <h1>Plans: {{ $month }}</h1>
+        <h3>Plans: {{ $month }}</h3>
     </div>
-    <div class="col-sm-6"  style="padding: 8px 8px; text-align: right;">
+    <!-- padding: 8px 8px; -->
+    <div class="col-sm-6"  style=" text-align: right;">
         {{ link_to_route('plans.create', '予定の作成' ,null, ['class' => 'btn btn-primary']) }}
     </div>
 </div>
@@ -70,6 +71,14 @@
                 </tr>
             @endforeach
         </table>
+        <br />
+        <br />
+        @include('element.page_info',
+        [
+            'git_url' => 'https://github.com/kuc-arc-f/lara58a_4plan',
+            'blog_url' => 'https://knaka0209.hatenablog.com/entry/lara58_11_plan'
+        ])
+
     </div><!-- content_end -->
 </div>
 <!-- -->

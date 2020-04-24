@@ -30,7 +30,8 @@
     <!-- container_top -->
     <div id="div_img_main2" class="cover" style="" valign="bottom">
         <div id="div_img_layer">
-            <h1>Demonstration<br>
+            <!-- pages -->
+            <h1>Sample app<br>
                 for knaka0209.net
             </h1>
         </div>
@@ -88,6 +89,13 @@ div#div_img_main2 {
   color: #FF7043;
   font-weight: bold;
 }   
+/* SP */
+@media screen and (max-width: 480px){
+    #div_img_main2 h1{
+        font-size: 28px;
+        padding: 2em 1em;
+    }
+}
 </style>
 <!-- --->
 <script>

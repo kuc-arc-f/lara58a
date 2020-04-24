@@ -7,10 +7,10 @@
     <div class="panel panel-default">
         <br />
         <div class="panel-heading">
-            {{ link_to_route('todos.index', '戻る' ,null, ['class' => 'btn btn-outline-primary']) }}
+            {{ link_to_route('chats.index', '戻る'  ,null, ['class' => 'btn btn-outline-primary'] ) }}
             <br />
-            <br />            
-            <h3>新規作成</h3>
+            <br />
+            <h3>chat - 新規作成</h3>
         </div>
         <hr />
 		@if (count($errors) > 0)
@@ -23,29 +23,28 @@
 			</div>
 		@endif
         <div class="panel-body">
-            {!! Form::model($todo, [
-                'route' => 'todos.store', 'method' => 'post', 'class' => 'form-horizontal'
+            {!! Form::model($chat, [
+                'route' => 'chats.store', 'method' => 'post', 'class' => 'form-horizontal'
             ]) !!}
             <div class="form-group">
-                {!! Form::label('title', 'title', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('name', 'name :', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('title', $todo->title, [
-                        'id' => 'task-title', 'class' => "form-control" ,'required'=>'required' ]) 
+                    {!! Form::text('name', $chat->name, [
+                         'class' => 'form-control' ,'required'=>'required' ]) 
                     !!}
                 </div>
             </div>
             <div class="form-group">
-                {!! Form::label('content', 'content', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('content', '説明 :', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::textarea('content', $todo->content, [
-                        'id' => 'todo-content', 'class' => 'form-control',
-                        'rows' => 6,'cols' => 10
-                    ]) !!}
+                    {!! Form::text('content', $chat->content, [
+                        'class' => 'form-control']) !!}
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    {!! Form::submit('タスク追加', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('追加する', ['class' => 'btn btn-primary']) !!}
                 </div>
             </div>
             {!! Form::close() !!}
