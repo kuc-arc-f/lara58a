@@ -33,8 +33,35 @@ Route::post('/mdats/csv_import', 'MdatsController@csv_import')->name('mdats.csv_
 Route::get('/mdats/csv_get', 'MdatsController@csv_get')->name('mdats.csv_get');
 Route::get('/mdats/chart', 'MdatsController@chart')->name('mdats.chart');
 Route::resource('mdats', 'MdatsController');
+// chat
+Route::get('/chats/test', 'ChatsController@test')->name('chats.test');
+Route::get('/chats/csv_get', 'ChatsController@csv_get')->name('chats.csv_get');
+Route::get('/chats/info_chat', 'ChatsController@info_chat')->name('chats.info_chat');
+Route::get('/chats/add_member', 'ChatsController@add_member')->name('chats.add_member');
+//Route::get('/chats/home', 'ChatsController@home')->name('chats.home');
+Route::resource('chats', 'ChatsController');
 //
 Auth::routes();
 //
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about', function () {
+    return view('about');
+});
+//
+Route::get('/users/test', 'UsersController@test')->name('users.test');
 
+/**************************************
+ * API
+ **************************************/
+Route::prefix('api')->group(function(){
+    //chats
+    Route::get('/apichats/get_post', 'ApiChatsController@get_post');
+    Route::post('/apichats/get_send_members', 'ApiChatsController@get_send_members');
+    Route::post('/apichats/update_post_client', 'ApiChatsController@update_post_client');
+    Route::post('/apichats/update_token', 'ApiChatsController@update_token');
+    Route::post('/apichats/update_post', 'ApiChatsController@update_post');
+    Route::post('/apichats/delete_post', 'ApiChatsController@delete_post');
+    //sys
+    Route::post('/apisystem/delete_db_day', 'ApiSystemController@delete_db_day');
+    Route::post('/apisystem/get_fcm_init', 'ApiSystemController@get_fcm_init');
+});
