@@ -2,7 +2,19 @@
 @section('title', 'タスク一覧')
 
 @section('content')
-
+<?php
+function valid_member($chat_id , $chat_members){
+//debug_dump("cid=" . $chat_id );
+    $ret = false;
+    foreach($chat_members  as $chat_member ){
+        if($chat_id == $chat_member->id){
+            $ret = true;
+//debug_dump($chat_member->id);
+        }
+    }
+    return $ret;
+}
+?>
 <div class="panel panel-default">
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -36,6 +48,11 @@
             <?php //debug_dump($tasks); ?>
             <tbody>
                 @foreach ($chats as $chat )
+                <?php
+                $valid = valid_member($chat->id , $chat_members);
+                //var_dump($valid);
+                ?>
+
                     <tr>
                         <td class="table-text">{{$chat->id}}
                         </td>
@@ -45,13 +62,15 @@
                             </h3>
                         </td>
                         <td class="table-text">
-                            <a href="chats/add_member?cid={{$chat->id}}"
-                                 class="btn btn-outline-primary btn-sm">参加する
-                            </a>
-                            <!--
-                            <a href="chats/delete_member?cid={{$chat->id}}">[ 退会 ]
-                            </a>
-                            -->
+                            <?php if($valid){ ?>
+                                <a href="chats/delete_member?cid={{$chat->id}}"
+                                    class="btn btn-outline-danger btn-sm">退会する
+                                </a>
+                            <?php }else{ ?>
+                                <a href="chats/add_member?cid={{$chat->id}}"
+                                    class="btn btn-outline-primary btn-sm">参加する
+                               </a>
+                            <?php }?>
                         </td>
                         <td class="table-text">
                             <div style="float :left; margin-right :10px">

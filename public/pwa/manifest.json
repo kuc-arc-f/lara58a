@@ -1,9 +1,9 @@
 {
-"short_name": "PWA-sample",
-"name": "PWA sample app-1",
+"short_name": "PWA-knaka",
+"name": "PWA knaka app",
 "display": "standalone",
 "orientation": "portrait",
-"start_url": "/",
+"start_url": "/home",
 "icons": [
 	{
 		"src": "images/icon.png",
