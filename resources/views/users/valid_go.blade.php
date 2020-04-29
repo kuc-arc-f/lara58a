@@ -33,7 +33,7 @@
 		!!}
 	</div>
 	<div class="form-group row">
-		<input class="form-check-input" type="checkbox" name="remember" id="remember" >
+		<input class="form-check-input" type="checkbox" name="remember" id="remember" checked="checked" >
 	</div>
 {!! Form::close() !!}
 </div>
