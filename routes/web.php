@@ -29,6 +29,7 @@ Route::resource('vue_books', 'VueBooksController');
 //
 Route::resource('members', 'MembersController');
 Route::resource('depts', 'DeptsController');
+Route::post('/todos/search_index', 'TodosController@search_index')->name('todos.search_index');
 Route::resource('todos', 'TodosController');
 Route::resource('vue_todos', 'VueTodosController');
 //
