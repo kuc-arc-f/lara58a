@@ -6,6 +6,8 @@
 
  date    : 2019/12/08
 
+ update : 2020/05/01
+
 ***
 
 Laravel 5.8 +mysql , CRUD sample
@@ -14,7 +16,7 @@ Laravel 5.8 +mysql , CRUD sample
 ### setup
 php composer.phar create-project --prefer-dist laravel/laravel lara58a "5.8.*"
 
-helper:
+* helper:
 
 php composer.phar require laravelcollective/html "5.8.*"
 
