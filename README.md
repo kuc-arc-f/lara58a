@@ -6,7 +6,7 @@
 
  date    : 2019/12/08
 
- update : 2020/05/01
+ update : 2020/05/24
 
 ***
 
@@ -19,6 +19,8 @@ php composer.phar create-project --prefer-dist laravel/laravel lara58a "5.8.*"
 * helper:
 
 php composer.phar require laravelcollective/html "5.8.*"
+
+* .env.local を参考に、 .env 修正下さい
 
 ***
 ### start

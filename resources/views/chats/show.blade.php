@@ -6,46 +6,60 @@
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-messaging.js"></script>
 <script src="/js/chat_show.js?A3"></script>
+<script src="/js/fcm_init.js?B1"></script>
 
 <!-- -->
 <div id="app">
 	<div class="panel panel-default">
-		<br />
 		<div class="panel-body">
-			{{ link_to_route('chats.index', '戻る', null, ["class" => "btn btn-outline-primary"]) }}
+			{{ link_to_route('chats.index', '戻る', null, 
+			["class" => "btn btn-outline-primary mt-2"]) }}
 			<br />
-			<br />
-			<h2>Chat: {{$chat->name}}</h2>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-sm-6">
+					<!-- Chat: -->
+					<h3>{{$chat->name}}</h3>
+				</div>
+				<!-- padding-right: 80px; -->
+				<div class="col-sm-6" style="text-align: center; ">
+					@include('element.chat_notify',[]) 
+				</div>
+			</div>
+			<hr class="mt-0 mb-2"/>
 			<div class="row">
 				<div class="col-sm-6" style="text-align: left;">
-					<p>chat-ID: {{$chat->id}}  
+					<p class="mb-2">chat-ID: {{$chat->id}}  
 						&nbsp;<a class="btn btn-outline-primary btn-sm"
-						 href="/chats/info_chat?id={{$chat->id}}">Chat info</a>
+						 href="/chats/info_chat?id={{$chat->id}}" 
+						 data-toggle="tooltip" title="参加メンバーなど表示できます">Chat info</a>
 					</p>					
 				</div>
 				<div class="col-sm-6" style="text-align: right;">
 					<a href="/chats/csv_get?chat_id={{$chat->id}}"
-					class="btn btn-outline-primary btn-sm">CSV 出力</a>
+					class="btn btn-outline-primary btn-sm" 
+					data-toggle="tooltip" title="CSVファイルの出力">CSV 出力</a>
 				</div>
 			</div>
-			<hr class="mt-0"/>
+			<hr class="mt-0 mb-2"/>
 			<!-- input_area -->
 			<div class="input_area_wrap" style="text-align: center;">
 				<div class="row">
 					<div class="col-sm-6" style="text-align: right;">
 						<!--  mb-0 -->
 						<textarea v-model="message" class="form-control mt-0"
+						style="padding :12px; 0px;"
 						rows="3" cols="40" id="send_text"
 						v-on:click="input_active();"
 						placeholder="please Input" required="required"></textarea>                        
 					</div>
 					<div class="col-sm-6" style="text-align: left;">
-						<button @click="addItem" id="send_button" class="btn btn-primary">Post</button>                        
+						<button @click="addItem" id="send_button" class="btn btn-primary"
+						data-toggle="tooltip" title="send post">Post
+						</button>                        
 					</div>
 				</div>
 			</div>
-			<hr class="mt-1 mb-2">	
-			<!--  mt-1  -->	
+			<hr class="mt-2 mb-2">	
 			<!-- post-list -->
 			<ul class="ul_post_box" style="list-style: none;">
 				<li v-for="task in tasks" v-bind:key="task.id">
@@ -53,33 +67,34 @@
 						v-on:click="open_modal(task.id)">
 						<div class="col_name">
 							<div class="post_user_wrap">
-								<span style="font-size: 42px; float: left;" class="pl-2">
+								<!--  class="pl-2" -->
+								<span style="font-size: 42px; float: left; padding: 0px;">
 									<div v-if="task.is_other">
 										<i class="far fa-meh"></i>	
 									</div>
-									<!-- style="color: #424242;" -->
-									<div v-else style="color: #616161;">
-										<i class="fas fa-meh"></i>
+									<div v-else style="color: #616161;  padding: 0px;">
+										<i class="fas fa-meh" style="margin: 0px;"></i>
 									</div>
 								</span>
 								<div class="time_box pl-1" >
-									<p class="mb-0">@{{ task.user_name }}:<br /> 
-										@{{ task.date_str }}<br />
-										ID: @{{ task.id }}
+									<p class="mb-0">
+										@{{ task.user_name }}:<br /> 
+										@{{ task.date_str }}
+
+										<!-- ID: @{{ task.id }} -->
 									</p>
 								</div>
 							</div>
 						</div>
-						<!-- style="width : 80%;" -->
 						<div class="col_body">
 							<p class="li_p_box mb-0" v-html="task.body">
 							</p>							 
 						</div>
 					<div>
-				
 				</li>
-				
 			</ul>
+			<hr />
+			{{ link_to_route('chats.index', '戻る', null, ["class" => "btn btn-outline-primary"]) }}
 		</div>
 
 		<!-- -->    
@@ -147,20 +162,21 @@
 	border-bottom: 1px solid #000;
 }
 .post_item .col_name{
-	/* max-width : 200px;
-	width : 20%; */
-	padding : 10px;
+	/* max-width : 200px; 
+	padding : 10px; */
+	padding : 0px 8px;
 	width : 180px;
 }
 .li_p_box{
-	/* margin-left : 52px; */
 	padding : 10px;
 }
 .time_box{
 	margin-left : 52px;
-	height: 62px;
+	/* height: 62px;
+	height: 42px;
+	 */
+	padding: 8px;
 	color: gray;
-/* font-size: 16px; */	
 	font-size: 0.875rem;
 }
 .hr_post_bottom{
@@ -171,9 +187,13 @@
 }
 /* input */
 #send_button{	margin : 30px 10px;	}
-/*
-#send_text{		margin : 20px 0px; }
-*/
+/* notify_menu */
+.notify_menu_wrap .dropdown-item a{
+	/* color: gray; */
+	padding : 0px;
+	font-size: 0.875rem;
+}
+
 </style>
 <!-- -->
 <div class="panel panel-default">
@@ -224,6 +244,7 @@ new Vue({
 		modal_item : [],
 		delete_ok : 0,
 		input_expand_none: 0,
+		notify_items : [],
 	},
 	created:function(){
 		this.get_posts(USER_ID);
@@ -254,7 +275,10 @@ new Vue({
 			if(item.user_id == USER_ID){
 				this.delete_ok = 1;
 			}
-//console.log(item.user_id);
+		},
+		move_chat: function(chat_id) {
+//			console.log(chat_id);
+			location.href= '/chats/' + chat_id;
 		},
 		get_modal_data(id, items ) {
 			var ret = null;
@@ -284,7 +308,20 @@ new Vue({
 //console.log( new_items  )
 				this.tasks  = new_items;
 				this.timer_start();
+				this.get_notify_menu(USER_ID);
 			})            
+		},
+		get_notify_menu(USER_ID) {
+			axios.get('/api/apichats/get_notify_menu?user_id=' +USER_ID)
+			.then(res =>  {
+				var items = res.data;
+				var new_items = [];
+				items.forEach(function(item){
+					new_items.push(item);
+				});
+				this.notify_items = new_items;
+console.log( this.notify_items )
+			})
 		},
 		addItem() {
 			console.log(this.message );
@@ -319,6 +356,36 @@ var AppConst = {
 	"PublicVapidKey" : "",
 	"FCM_SERVER_KEY" : "",
 }
+var data = { 
+	'param1': 1, 
+	'mail': '<?= $SUPER_USER_MAIL ?>', 
+	'password': 'password' 
+};
+axios.post('/api/apisystem/get_fcm_init' , data ).then(res => {
+	var resParams = res.data.params;
+	var params ={
+		"messagingSenderId" : resParams.FCM_messagingSenderId,
+		"PublicVapidKey" : resParams.FCM_PublicVapidKey,
+		"FCM_SERVER_KEY" : resParams.FCM_SERVER_KEY
+	};
+	AppConst = params;
+	fcm_init_proc();
+//console.log( AppConst );
+});
+
+/**********************************************
+ *
+ *********************************************/
+ function fcm_init_proc(){
+	firebase.initializeApp({
+		'messagingSenderId': AppConst.messagingSenderId
+	});
+	messaging = firebase.messaging();
+	messaging.usePublicVapidKey(AppConst.PublicVapidKey );
+	FCM_SERVER_KEY = AppConst.FCM_SERVER_KEY ;
+	fcm_get_token(CHAT_MEMBER_ID);
+	fcm_onMessage();
+}
 /**********************************************
  *
  *********************************************/    
@@ -348,9 +415,6 @@ function fcm_onMessage(){
 		console.log(notify.body );
 	});
 }
-
 </script>
-<!-- bundle.js -->
-<script src="/js/fcm_init.js?A3"></script>
 
 @endsection
