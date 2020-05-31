@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $task->name)
+@section('title', $task->title )
 
 @section('content')
 

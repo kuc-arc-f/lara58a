@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '一覧')
+@section('title', 'plan')
 
 @section('content')
 <!-- <br /> -->

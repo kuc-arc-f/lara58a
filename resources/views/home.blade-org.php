@@ -28,9 +28,6 @@
 			<a href="/messages" class="btn btn-outline-primary" >Messages</a>
 		</div>		
 		<div class="form-group">
-			<a href="/bbs" class="btn btn-outline-primary" >BBS</a>
-		</div>
-		<div class="form-group">
 			<a href="/plans" class="btn btn-outline-primary" >Plans</a>
 		</div>
 		<div class="form-group">

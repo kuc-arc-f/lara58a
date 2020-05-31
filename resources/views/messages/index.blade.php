@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', ' ')
+@section('title', 'messages')
 
 @section('content')
 <script src="/js/message.js?A1"></script>

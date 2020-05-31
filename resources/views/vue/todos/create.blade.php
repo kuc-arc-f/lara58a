@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button class="btn btn-outline-primary" v-on:click="send_post">投稿
+                    <button class="btn btn-primary" v-on:click="send_post">投稿
                     </button>                    
                 </div>
             </div>

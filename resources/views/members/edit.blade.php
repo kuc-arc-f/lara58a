@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "$task->nameの編集")
+@section('title', "編集")
 
 @section('content')
 

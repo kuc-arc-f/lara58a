@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'タスク一覧')
+@section('title', 'sort_item')
 
 @section('content')
 <!-- CDNJS :: Sortable (https://cdnjs.com/) -->

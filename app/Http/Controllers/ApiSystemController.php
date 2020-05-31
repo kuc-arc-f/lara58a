@@ -10,6 +10,8 @@ use App\User;
 use App\Todo;
 use App\Plan;
 use App\Task;
+use App\BbsAnswer;
+use App\BbsPost;
 use App\Book;
 use App\Chat;
 use App\ChatMember;
@@ -60,7 +62,7 @@ class ApiSystemController extends Controller
             $this->delete_members();
             $this->delete_mdats(); 
             $this->delete_messages();
-            //file-delete
+            $this->delete_bbs();
 //            $this->delete_mdat_files(); 
         }
 //exit();
@@ -248,6 +250,44 @@ class ApiSystemController extends Controller
             $item = Mdat::find($item["id"]);
             $item->delete();            
         }
+    }
+    /**************************************
+     *
+     **************************************/
+    private function delete_bbs(){
+        $posts = $this->get_delete_bbs_posts();
+        foreach ($posts as $item) {
+            $item = BbsPost::find($item["id"]);
+            $item->delete();            
+        }        
+        $answers = $this->get_delete_bbs_answers();
+//var_dump($answers );
+        foreach ($answers as $item) {
+            $item = BbsAnswer::find($item["id"]);
+            $item->delete();            
+        }  
+    }
+    /**************************************
+     *
+     **************************************/
+    private function get_delete_bbs_posts(){
+        $posts = [];
+        $posts = BbsPost::get();
+        if(!empty($posts )){
+            $posts = $posts->toArray();
+        }        
+        return $posts;
+    }
+    /**************************************
+     *
+     **************************************/
+    private function get_delete_bbs_answers(){
+        $answers = [];
+        $answers = BbsAnswer::get();
+        if(!empty($answers )){
+            $answers = $answers->toArray();
+        }        
+        return $answers;
     }
     /**************************************
      *

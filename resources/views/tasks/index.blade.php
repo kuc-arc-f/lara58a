@@ -50,15 +50,13 @@
                                     data-toggle="tooltip" title="編集します">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <!--
-                                {{ link_to_route('tasks.edit', '編集'
-                                , $task->id, ['class' => 'btn btn-sm btn btn-outline-primary']) }}                                    
-                                -->
                             </div>
+                            <!--
                             {{ Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) }}
                                 {{ Form::hidden('id', $task->id) }}
                                 {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
                             {{ Form::close() }}
+                            -->
                         </td>
                     </tr>
                 @endforeach

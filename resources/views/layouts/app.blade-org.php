@@ -60,8 +60,20 @@
 						<a class="dropdown-item" href="/vue_books">VueBooks</a>
 						<a class="dropdown-item" href="/vue_sort_items">VueSortItems</a>
 					</div><!-- ./dropdown-menu -->
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/bbs">BBS </a>
 				</li>                
-
+				<li class="nav-item active">
+					<a class="nav-link" href="/messages">Messages
+						<!--
+						<span style="font-size: 1.5rem;"
+						 data-toggle="tooltip" title="Message receive">
+							<i class="far fa-envelope"></i>
+						</span>							
+						-->
+					</a>
+				</li>				
 				<li class="nav-item active">
 					<a class="nav-link" href="/chats">Chats</a>
 				</li>                  
@@ -75,6 +87,13 @@
 			<!-- right_nav -->
 			<ul class="navbar-nav">
 				@auth
+					<?php if (isset($messages) && isset($message_display_mode)){ ?>
+						<?php if(count($messages) > 0){ ?>
+							<li class="nav-item">
+								@include('element.message', ['messages' => $messages ])							
+							</li>						
+						<?php } ?>
+					<?php } ?>
 					<?php if (isset($user->name)){ ?>
 					<li class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
