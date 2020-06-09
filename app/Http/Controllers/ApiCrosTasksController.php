@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+
 //
-class ApiTasksController extends Controller
+class ApiCrosTasksController extends Controller
 {
     /**************************************
      *
@@ -13,15 +14,6 @@ class ApiTasksController extends Controller
     public function __construct(){
         $this->TBL_LIMIT = 500;
     }
-    /*
-    public function index()
-    {   
-        $todos = Task::orderBy('id', 'desc')
-        ->limit($this->TBL_LIMIT)
-        ->get();
-        return response()->json($todos);
-    }
-    */
     /**************************************
      *
      **************************************/
@@ -32,8 +24,7 @@ class ApiTasksController extends Controller
         ->limit($this->TBL_LIMIT)
         ->get();
         return response()->json($todos);
-    }
-
+    }   
     /**************************************
      *
      **************************************/  
@@ -53,14 +44,7 @@ class ApiTasksController extends Controller
         $task = Task::find(request('id'));
         $ret = ['id'=> request('id') ];
         return response()->json($task );
-    }
-    /*
-    public function show($id)
-    {
-        $task = Task::find($id);
-        return response()->json($task);
-    }  
-    */
+    }        
     /**************************************
      *
      **************************************/
@@ -82,16 +66,6 @@ class ApiTasksController extends Controller
         $ret = ['id'=> request('id') ];
         return response()->json($ret);
     }
-    /**************************************
-     *
-     **************************************/
-    public function test_tasks()
-    {   
-//exit();
-        $todos = Task::orderBy('id', 'desc')
-        ->limit($this->TBL_LIMIT)
-        ->get();
-        return response()->json($todos);
-    }
 
+    
 }

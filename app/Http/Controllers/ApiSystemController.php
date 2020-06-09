@@ -63,7 +63,7 @@ class ApiSystemController extends Controller
             $this->delete_mdats(); 
             $this->delete_messages();
             $this->delete_bbs();
-//            $this->delete_mdat_files(); 
+            $this->delete_mdat_files(); 
         }
 //exit();
         return response()->json( $ret );
@@ -328,7 +328,6 @@ class ApiSystemController extends Controller
 
 		}
     }
-
     /**************************************
      *
      **************************************/
@@ -369,7 +368,6 @@ class ApiSystemController extends Controller
             return response()->json( $ret );            
             exit();
         }
-
 //var_dump($data);
         $params = [
             "FCM_messagingSenderId" => $this->FCM_messagingSenderId,
@@ -419,22 +417,22 @@ class ApiSystemController extends Controller
      **************************************/   
     private function delete_mdat_files(){
         $nowdate = Date("Ymd");
-        $directory = storage_path('app/csv/');
-var_dump($nowdate );
-var_dump($directory );
+        $directory = storage_path('app/csv');
+//var_dump($directory );
 //        $files = Storage::files($directory);
-//        $files = Storage::files("local");
-        $files = Storage::allFiles("public");
-var_dump($files );
-        //exit();
-//        $files = scandir($directory );
+//        $files = Storage::allFiles($csv_path);
+// var_dump($files );
+        $files = scandir($directory );
         foreach($files as $file ){
-            $filename= $directory . "/" . $file;
-var_dump($filename );
+            $filename= "csv/" . $file;
+//var_dump($filename );
+            Storage::delete($filename );
+/*
             $file_dt = date ("Ymd", filemtime($filename));
             if((int)$nowdate > (int)$file_dt ){
-//                unlink($filename);
+                unlink($filename);
             }            
+*/
         }
     } 
 

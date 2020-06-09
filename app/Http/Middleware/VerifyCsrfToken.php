@@ -19,6 +19,11 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'api/apisystem/delete_db_day',
+        'api/apichats/get_send_members',
+        'api/apichats/update_post_client',
+//        'api/apitasks/get_tasks',
+//        'api/cross_task/create_task',
     ];
+    
 }
