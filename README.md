@@ -1,12 +1,12 @@
 ﻿# lara58a
 
- Version: 0.9.1
+ Version: 0.9.2
 
  Author  : Kouji Nakashima / kuc-arc-f.com
 
  date    : 2019/12/08
 
- update : 2020/06/09
+ update : 2020/06/10
 
 ***
 
