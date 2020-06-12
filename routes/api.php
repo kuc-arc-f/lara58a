@@ -63,5 +63,36 @@ Route::middleware(['cors'])->group(function () {
         return response()->json();
     });    
     Route::post('cross_todos/delete_todo', 'ApiTodosController@delete_todo' );
-
+    Route::options('cross_messages/get_item', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/get_item', 'ApiMessagesController@get_item' );
+    Route::options('cross_messages/get_sent_item', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/get_sent_item', 'ApiMessagesController@get_sent_item' );
+    Route::options('cross_messages/create_message', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/create_message', 'ApiCrosMessagesController@create_message' );
+    Route::options('cross_messages/get_user', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/get_user', 'ApiMessagesController@get_user');
+    Route::options('cross_messages/get_message', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/get_message', 'ApiCrosMessagesController@get_message' );
+    Route::options('cross_messages/get_sent_message', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/get_sent_message', 'ApiCrosMessagesController@get_sent_message' );
+    Route::options('cross_messages/delete_message', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/delete_message', 'ApiCrosMessagesController@delete_message' );
+    Route::options('cross_messages/get_last_item', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/get_last_item', 'ApiMessagesController@get_last_item' );
 });
