@@ -95,4 +95,11 @@ Route::middleware(['cors'])->group(function () {
         return response()->json();
     });
     Route::post('cross_messages/get_last_item', 'ApiMessagesController@get_last_item' );
+    Route::options('cross_messages/search', function () {
+        return response()->json();
+    });
+    Route::post('cross_messages/search', 'ApiMessagesController@search' );
+
+    Route::get('cross_messages/export', 'ApiCrosMessagesController@export');
+
 });

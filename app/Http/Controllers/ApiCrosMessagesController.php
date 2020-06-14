@@ -76,6 +76,42 @@ class ApiCrosMessagesController extends Controller
         $message->delete();
         $ret = ['id'=> request('id') ];
         return response()->json($ret );
-	}        
+    }   
+	/**************************************
+     *
+     **************************************/
+    public function export(){
+        if (isset($_GET['id'])){
+            $id  = $_GET['id'];
+            $message = Message::find($id);
+            $dt = new Carbon($message->created_at);
+            $datetime = $dt->format('Ymd_Hi');
+
+            $to_user = User::where('id', $message->to_id)
+            ->first();
+            $from_user = User::where('id', $message->from_id )
+            ->first();			
+            //text-get
+            $stream = fopen('php://temp', 'r+b');
+            fwrite($stream, "Title : " . $message->title . "\r\n" );
+            fwrite($stream, "Created : " . $message->created_at . "\r\n" );
+            fwrite($stream, "From : " . $from_user->name . "\r\n" );
+            fwrite($stream, "To : " . $to_user->name . "\r\n" );
+            fwrite($stream, "ID : " . $message->id . "\r\n" );
+            fwrite($stream, "=========================\r\n" );
+            fwrite($stream, $message->content . "\r\n" );
+            rewind($stream);
+            $csv = stream_get_contents($stream);
+            $attachment = "attachment; filename=message_{$datetime}.txt";
+//var_dump( $s );
+//exit();
+            return response($csv )
+                ->withHeaders([
+                    'Content-Type' => 'text/csv',
+                    'Content-Disposition' => $attachment,
+                ]);			
+            exit();
+        }
+    }         
 
 }
