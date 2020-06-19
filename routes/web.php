@@ -36,6 +36,7 @@ Route::resource('vue_todos', 'VueTodosController');
 Route::post('/vue_sort_items/update_number', 'VueSortItemsController@update_number')->name('vue_sort_items.update_number');
 Route::resource('vue_sort_items', 'VueSortItemsController');
 //
+Route::get('/plans/week', 'PlansController@week')->name('plans.week');
 Route::resource('plans', 'PlansController');
 //
 Route::post('/mdats/csv_import', 'MdatsController@csv_import')->name('mdats.csv_import');
@@ -50,6 +51,7 @@ Route::get('/chats/info_chat', 'ChatsController@info_chat')->name('chats.info_ch
 Route::get('/chats/add_member', 'ChatsController@add_member')->name('chats.add_member');
 Route::get('/chats/delete_member', 'ChatsController@delete_member')->name('chats.delete_member');
 Route::get('/chats/next_join', 'ChatsController@next_join')->name('chats.next_join');
+Route::get('/chats/home', 'ChatsController@home')->name('chats.home');
 Route::get('/chats/test', 'ChatsController@test')->name('chats.test');
 
 Route::post('/chats/search_index', 'ChatsController@search_index')->name('chats.search_index');

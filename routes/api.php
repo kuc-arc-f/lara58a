@@ -99,7 +99,49 @@ Route::middleware(['cors'])->group(function () {
         return response()->json();
     });
     Route::post('cross_messages/search', 'ApiMessagesController@search' );
-
     Route::get('cross_messages/export', 'ApiCrosMessagesController@export');
+    //chats
+    Route::options('cross_chats/get_chats', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/get_chats', 'ApiCrosChatsController@get_chats');
+    Route::options('cross_chats/get_member_info', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/get_member_info', 'ApiCrosChatsController@get_member_info');
+    Route::options('cross_chats/add_member', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/add_member', 'ApiCrosChatsController@add_member');
+    Route::options('cross_chats/delete_member', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/delete_member', 'ApiCrosChatsController@delete_member');
+    Route::options('cross_chats/get_join_chats', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/get_join_chats', 'ApiCrosChatsController@get_join_chats');
+    Route::options('cross_chats/create_chat', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/create_chat', 'ApiCrosChatsController@create_chat');
+    Route::options('cross_chats/update_chat', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/update_chat', 'ApiCrosChatsController@update_chat');
+    Route::options('cross_chats/delete_chat', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/delete_chat', 'ApiCrosChatsController@delete_chat');
+
+    Route::get('cross_chats/get_post', 'ApiChatsController@get_post');
+    Route::options('cross_chats/update_post', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/update_post', 'ApiChatsController@update_post');
+    Route::options('cross_chats/update_token', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/update_token', 'ApiChatsController@update_token');
 
 });
