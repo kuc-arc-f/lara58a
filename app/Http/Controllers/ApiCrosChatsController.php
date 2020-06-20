@@ -200,5 +200,15 @@ class ApiCrosChatsController extends Controller
 
         return response()->json($data );
     }
+    /**************************************
+     *
+     **************************************/  
+    public function delete_post(Request $request){
+        $data = $request->all();
+		$id = (int)$data["id"];
+		$chat_post = ChatPost::find($id);
+		$chat_post->delete();        
+        return response()->json($data );
+    }
 
 }
