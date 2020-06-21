@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Libs\LibChat;
 use App\Libs\AppConst;
 use App\Chat;
 use App\ChatMember;
@@ -39,6 +40,8 @@ class ApiCrosChatsController extends Controller
      *
      **************************************/
     public function get_member_info(Request $request){
+        $LibChat = new LibChat;
+
         $data = $request->all();
         $chat_id = $data["chat_id"];
         $user_id = $data["user_id"];
@@ -49,11 +52,14 @@ class ApiCrosChatsController extends Controller
         ->get(); 
         $chat_member = ChatMember::where('chat_id', $chat_id )
             ->where('user_id', $user_id)
-            ->first();        
+            ->first();    
+        $chat_posts = $LibChat->get_posts($chat_id ,$this->TBL_LIMIT );
+
         $retArr = [
             'chat_members' => $chat_members,
             "chat_member" => $chat_member ,
             'chat' => $chat,
+            'chat_posts' => $chat_posts,
         ];
         return response()->json($retArr );
     }
