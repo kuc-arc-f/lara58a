@@ -137,6 +137,10 @@ Route::middleware(['cors'])->group(function () {
         return response()->json();
     });
     Route::post('cross_chats/delete_post', 'ApiCrosChatsController@delete_post');
+    Route::options('cross_chats/info_chat', function () {
+        return response()->json();
+    });
+    Route::post('cross_chats/info_chat', 'ApiCrosChatsController@info_chat');
 
     Route::get('cross_chats/get_post', 'ApiChatsController@get_post');
     Route::options('cross_chats/update_post', function () {
