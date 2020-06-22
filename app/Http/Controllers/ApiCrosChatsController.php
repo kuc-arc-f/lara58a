@@ -74,6 +74,19 @@ class ApiCrosChatsController extends Controller
     /**************************************
      *
      **************************************/
+    public function csv_get(){
+        $LibChat = new LibChat;
+        $csv= $LibChat->csv_get( $this->TBL_LIMIT );
+        return response($csv )
+        ->withHeaders([
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="chats.csv"',
+        ]);                
+        exit();
+    }    
+    /**************************************
+     *
+     **************************************/
     private function get_chat_members($user_id){
         $chat_members = ChatMember::select([
             "chats.id",

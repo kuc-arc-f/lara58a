@@ -141,6 +141,7 @@ Route::middleware(['cors'])->group(function () {
         return response()->json();
     });
     Route::post('cross_chats/info_chat', 'ApiCrosChatsController@info_chat');
+    Route::get('cross_chats/csv_get', 'ApiCrosChatsController@csv_get');
 
     Route::get('cross_chats/get_post', 'ApiChatsController@get_post');
     Route::options('cross_chats/update_post', function () {
