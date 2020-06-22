@@ -34,7 +34,13 @@ class ApiCrosChatsController extends Controller
             $chat["valid_join"] = $valid;
             $chat_items[] = $chat;
         }
-        return response()->json($chat_items );
+        $join_chats = $this->get_join_items($user_id);
+
+        $retArr = [
+            'chat_items' => $chat_items,
+            'join_chats' => $join_chats,
+        ];        
+        return response()->json($retArr );
     }
     /**************************************
      *
@@ -54,12 +60,14 @@ class ApiCrosChatsController extends Controller
             ->where('user_id', $user_id)
             ->first();    
         $chat_posts = $LibChat->get_posts($chat_id ,$this->TBL_LIMIT );
+        $join_chats = $this->get_join_items($user_id );
 
         $retArr = [
             'chat_members' => $chat_members,
             "chat_member" => $chat_member ,
             'chat' => $chat,
             'chat_posts' => $chat_posts,
+            'join_chats' => $join_chats,
         ];
         return response()->json($retArr );
     }
@@ -156,9 +164,7 @@ class ApiCrosChatsController extends Controller
     /**************************************
      *
      **************************************/  
-    public function get_join_chats(Request $request){
-        $data = $request->all();
-        $user_id = $data["user_id"];
+    private function get_join_items($user_id ){
         $join_chats = Chat::orderBy('chats.id', 'desc')
         ->select([
             'chats.id',
@@ -169,6 +175,15 @@ class ApiCrosChatsController extends Controller
         ->join('chat_members','chat_members.chat_id','=','chats.id')
         ->where('chat_members.user_id', $user_id)
         ->get();
+        return $join_chats;
+    }
+    /**************************************
+     *
+     **************************************/  
+    public function get_join_chats(Request $request){
+        $data = $request->all();
+        $user_id = $data["user_id"];
+        $join_chats = $this->get_join_items($user_id );
 
         return response()->json($join_chats );
     } 
