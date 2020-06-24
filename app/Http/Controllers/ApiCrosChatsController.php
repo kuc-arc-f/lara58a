@@ -45,6 +45,32 @@ class ApiCrosChatsController extends Controller
     /**************************************
      *
      **************************************/
+    public function search_chat(Request $request){
+        $data = $request->all();
+        $user_id = $data["user_id"];
+        $search_name = $data["search_name"];
+
+        $chats = Chat::orderBy('id', 'desc')
+        ->where("name", "like", "%" . $search_name . "%" )    
+        ->skip(0)->take($this->TBL_LIMIT)
+        ->get();    
+        $chat_members = $this->get_chat_members($user_id);
+        $chat_items = [];
+        foreach($chats as $chat ){
+            $valid = $this->valid_member($chat->id , $chat_members);
+            $chat["valid_join"] = $valid;
+            $chat_items[] = $chat;
+        }
+//        $join_chats = $this->get_join_items($user_id);
+        $retArr = [
+            'chat_items' => $chat_items,
+        ];        
+        return response()->json($retArr );
+    }
+
+    /**************************************
+     *
+     **************************************/
     public function get_member_info(Request $request){
         $LibChat = new LibChat;
 
